@@ -1,0 +1,47 @@
+#!/system/bin/sh
+# DreamNarae 2012.12.14 FINAL
+# Custom tweak!
+
+for n in 1 2
+do
+
+  NUMBER_OF_CHECKS=2 
+  SLEEP_TIME=4
+  PROCESSES_TOTAL=8
+
+  CHECK_COUNT=0 # Don't edit
+  P_CHECK=0 # Don't edit
+
+  PROCESS_1=0; PROCESS_2=0; PROCESS_3=0; PROCESS_4=0; PROCESS_5=0; PROCESS_6=0;
+  PROCESS_7=0; PROCESS_8=0;
+  
+  if [ $n -eq "1" ]; then
+    fi;
+
+    # Pause and then loop until kswapd0 is found, which should be instant anyway
+    sleep 1
+    SWAP_SLEEP_TIME=3; SWAP_NUMBER_OF_CHECKS=30; SWAP_CHECK_COUNT=0; SWAP_CHECK_COUNT_OK=0; while [ $SWAP_CHECK_COUNT -lt $SWAP_NUMBER_OF_CHECKS ]; do if [ `pidof kswapd0` ]; then renice 19 `pidof kswapd0`; SWAP_CHECK_COUNT=$SWAP_NUMBER_OF_CHECKS; SWAP_CHECK_COUNT_OK=1; else sleep $SWAP_SLEEP_TIME; fi; SWAP_CHECK_COUNT=`expr $SWAP_CHECK_COUNT + 1`; done; if [ $SWAP_CHECK_COUNT_OK -lt 1 ]; then echo "LST Debug: 'kswapd0' expired after `expr $SWAP_CHECK_COUNT \* $SWAP_SLEEP_TIME` seconds"; fi;
+
+  fi;
+
+  if [ $n -eq "2" ]; then
+   #debug_echo delete. 
+  fi;
+
+  while [ $CHECK_COUNT -lt $NUMBER_OF_CHECKS ];
+  do
+    # System & lst browser
+    if [ $PROCESS_1 -eq "0" ]; then PNAME="com.android.phone"; NICELEVEL=-20; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_1=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_2 -eq "0" ]; then PNAME="com.android.systemui"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_2=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_3 -eq "0" ]; then PNAME="com.android.settings"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_3=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_4 -eq "0" ]; then PNAME="com.android.vending"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_4=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_5 -eq "0" ]; then PNAME="com.android.camera"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_5=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_6 -eq "0" ]; then PNAME="com.android.contacts"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_6=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_7 -eq "0" ]; then PNAME="com.android.mms"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_7=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+    if [ $PROCESS_8 -eq "0" ]; then PNAME="com.android.calculator2"; NICELEVEL=-18; if [ `pidof $PNAME` ]; then renice $NICELEVEL `pidof $PNAME`; PROCESS_8=1; P_CHECK=`expr $P_CHECK + 1`; fi; fi;
+
+    # Loop~ Loop~ Loop~
+    if [ $P_CHECK -ge $PROCESSES_TOTAL ]; then CHECK_COUNT=$NUMBER_OF_CHECKS; else sleep $SLEEP_TIME; fi;
+    CHECK_COUNT=`expr $CHECK_COUNT + 1`;
+  done
+done
