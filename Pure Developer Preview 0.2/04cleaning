@@ -1,0 +1,38 @@
+#!/system/bin/sh
+######################################################################
+###################### DreamNarae Pure 1.0 ###########################
+#################################Best of DreamNarae Tweak#############
+## Made by Sopiane(Dong Gil, Seo)
+## and Rie (Eun Hee, Lee)
+## and Iren (Jung Yeon, Lee)
+## and Ayana (Eun Jung, Lee)
+## With four people going to make the best Android Tweak!
+## Supported by Colorful Harmony Team- Angeloid Team
+## Thanks to Developer, and User.
+## This Version is Final Version We made.
+## Enjoy Your Device With DreamNarae!
+######################################################################
+
+echo "04cleaning Start!"
+
+rm -rf /data/lost+found/* 2> /dev/null;
+rm -rf /system/lost+found/* 2> /dev/null;
+rm -rf /preload/lost+found/* 2> /dev/null;
+rm -rf /cache/lost+found/* 2> /dev/null;
+rm -rf /data/tombstones/* 2> /dev/null;
+rm -rf /data/anr/* 2> /dev/null;
+rm -r /data/local/tmp/*
+rm -r /data/tmp/*
+rm -r /data/system/usagestats/*
+rm -r /data/system/appusagestats/*
+rm -r /data/system/dropbox/*
+busybox chmod 000 /data/system/userbehavior.db
+busybox chmod 000 /data/system/usagestats/
+busybox chmod 000 /data/system/dropbox/
+busybox chmod 000 /data/anr/
+busybox chmod 000 /data/tombstones/
+busybox chmod 000 /data/system/appusagestats/
+busybox chmod 000 /data/data/com.google.android.location/files/cache.cell
+busybox chmod 000 /data/data/com.google.android.location/files/cache.wifi
+
+echo "04cleaning Complete! Next to 05ZipAlign"
